@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Win VPN — Premium Proxy Service</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #f97316; }
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 50% -20%, #442200, #000000 80%);
+        }
+        .blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            filter: blur(100px);
+            z-index: -1;
+            border-radius: 50%;
+            animation: move 25s infinite alternate;
+        }
+        @keyframes move { from { transform: translate(-20%, -20%); } to { transform: translate(30%, 40%); } }
+
+        .liquid-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px) saturate(160%);
+            -webkit-backdrop-filter: blur(25px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 32px;
+        }
+        .liquid-card:active { transform: scale(0.98); background: rgba(249, 115, 22, 0.05); }
+        
+        .premium-border { border: 1px solid rgba(249, 115, 22, 0.4) !important; box-shadow: 0 0 30px rgba(249, 115, 22, 0.1); }
+        
+        #modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #000000;
+            z-index: 1000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="p-6">
+
+    <div class="bg-glow"></div>
+    <div class="blob"></div>
+
+    <div class="max-w-md mx-auto">
+        
+        <header class="text-center mb-10 mt-4">
+            <div class="relative inline-block mb-4">
+                <div class="absolute inset-0 bg-orange-500 blur-3xl opacity-20"></div>
+                <div class="relative w-24 h-24 liquid-card flex items-center justify-center">
+                    <span class="text-5xl">🛡️</span>
+                </div>
+            </div>
+            <h1 class="text-5xl font-extrabold tracking-tighter italic uppercase">Win VPN</h1>
+            <p class="text-orange-500/60 text-[10px] font-black tracking-[0.5em] mt-3 uppercase italic">Ultra Fast & Secure</p>
+        </header>
+
+        <section class="space-y-4 mb-8">
+            <h2 class="text-xs font-black uppercase tracking-widest text-white/30 px-2 italic">Планы подписки</h2>
+            
+            <div onclick="redirectToBot('1_month')" class="liquid-card p-6 flex justify-between items-center cursor-pointer">
+                <div><h3 class="text-xl font-bold italic uppercase">1 Месяц</h3><p class="text-[10px] text-white/30 tracking-widest uppercase">Base Plan</p></div>
+                <div class="text-2xl font-black italic">100 ₽</div>
+            </div>
+
+            <div onclick="redirectToBot('3_months')" class="liquid-card p-7 flex justify-between items-center cursor-pointer premium-border relative">
+                <div class="absolute -top-3 left-6 bg-orange-600 text-[9px] px-3 py-1 rounded-full font-black uppercase tracking-tighter">РЕКОМЕНДУЕМ</div>
+                <div><h3 class="text-xl font-bold italic uppercase text-orange-500">3 Месяца</h3><p class="text-[10px] text-orange-500/40 tracking-widest uppercase">Premium Plan</p></div>
+                <div class="text-2xl font-black italic text-orange-500">250 ₽</div>
+            </div>
+
+            <div onclick="redirectToBot('1_year')" class="liquid-card p-6 flex justify-between items-center cursor-pointer">
+                <div><h3 class="text-xl font-bold italic uppercase">1 Год</h3><p class="text-[10px] text-green-500 font-bold tracking-widest uppercase">Max Savings</p></div>
+                <div class="text-2xl font-black italic">500 ₽</div>
+            </div>
+        </section>
+
+        <section class="liquid-card p-6 mb-4">
+            <h3 class="text-[10px] font-black uppercase tracking-widest text-white/40 mb-4 italic">Поддерживаемые платформы</h3>
+            <div class="flex flex-wrap gap-3">
+                <div class="bg-white/5 px-3 py-2 rounded-xl border border-white/5 text-[11px] font-bold">📱 Android</div>
+                <div class="bg-white/5 px-3 py-2 rounded-xl border border-white/5 text-[11px] font-bold">🍎 iOS / Mac</div>
+                <div class="bg-white/5 px-3 py-2 rounded-xl border border-white/5 text-[11px] font-bold">💻 Windows</div>
+                <div class="bg-white/5 px-3 py-2 rounded-xl border border-white/5 text-[11px] font-bold">🐧 Linux</div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-2 gap-4 mb-10">
+            <div class="liquid-card p-5">
+                <div class="text-orange-500 text-xl mb-2">🌍</div>
+                <h4 class="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">География</h4>
+                <p class="text-[11px] font-bold">Европа и Азия</p>
+            </div>
+            <div class="liquid-card p-5">
+                <div class="text-orange-500 text-xl mb-2">⚡</div>
+                <h4 class="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">Скорость</h4>
+                <p class="text-[11px] font-bold">До 1 Гбит/с</p>
+            </div>
+        </section>
+
+        <footer class="text-center space-y-8 pb-10">
+            <div class="flex justify-center gap-8 opacity-20 grayscale invert">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" width="40">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Mir-logo.svg" width="40">
+            </div>
+            <div class="text-[9px] text-white/30 uppercase tracking-[0.3em] font-bold leading-relaxed">
+                Win VPN Digital Solutions<br>
+                Official Support: <a href="https://t.me/arsvat2" class="text-orange-500">@arsvat2</a>
+            </div>
+            <div class="flex justify-center gap-6 text-[10px] font-black text-white/40 uppercase tracking-tighter">
+                <span onclick="openModal('oferta')" class="cursor-pointer underline decoration-white/10">Публичная Оферта</span>
+                <span onclick="openModal('privacy')" class="cursor-pointer underline decoration-white/10">Приватность</span>
+            </div>
+        </footer>
+    </div>
+
+    <div id="modal">
+        <button onclick="closeModal()" class="text-orange-500 font-black tracking-widest text-xs mb-10 flex items-center">
+            <span class="text-2xl mr-2">←</span> НАЗАД
+        </button>
+        <div id="modal-content" class="text-xs text-white/70 leading-relaxed space-y-6"></div>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+        tg.setHeaderColor('#000000');
+
+        function redirectToBot(plan) {
+            tg.HapticFeedback.impactOccurred('heavy');
+            setTimeout(() => {
+                tg.openTelegramLink('https://t.me/WinVPN1_bot?start=buy_' + plan);
+            }, 150);
+        }
+
+        function openModal(type) {
+            const content = {
+                oferta: `
+                    <h2 class="text-3xl font-black italic uppercase text-white mb-8">Публичная оферта</h2>
+                    <div class="space-y-6">
+                        <p><strong>1. Общие положения:</strong> Настоящая оферта является официальным предложением Win VPN (далее — Исполнитель) по предоставлению доступа к инфраструктуре защищенной передачи данных.</p>
+                        <p><strong>2. Предмет договора:</strong> Исполнитель обязуется предоставить Пользователю право использования серверных мощностей посредством передачи уникального цифрового ключа конфигурации.</p>
+                        <p><strong>3. Порядок оплаты:</strong> Оплата услуг производится Пользователем через платежную систему Lava в размере 100% предоплаты согласно выбранному тарифу.</p>
+                        <p><strong>4. Порядок возврата (ст. 26.1 ЗоЗПП):</strong> Согласно действующему законодательству РФ, цифровые товары надлежащего качества, имеющие индивидуально-определенные свойства (персональные ключи доступа), возврату не подлежат. Услуга считается оказанной в полном объеме в момент генерации и передачи ключа в Telegram-бот.</p>
+                        <p><strong>5. Ответственность:</strong> Исполнитель не несет ответственности за использование сервиса в противоправных целях. Пользователь обязуется соблюдать законы страны нахождения.</p>
+                    </div>`,
+                privacy: `
+                    <h2 class="text-3xl font-black italic uppercase text-white mb-8">Политика конфиденциальности</h2>
+                    <div class="space-y-6">
+                        <p><strong>1. Сбор данных:</strong> Мы придерживаемся строгой политики "No-Logs". Мы не собираем, не храним и не передаем данные о вашем интернет-трафике, посещенных сайтах или IP-адресах.</p>
+                        <p><strong>2. Техническая информация:</strong> Для работы сервиса используется только ваш Telegram ID, необходимый для идентификации активной подписки.</p>
+                        <p><strong>3. Безопасность:</strong> Все данные шифруются по протоколу AES-256 военного уровня. Мы используем современные протоколы VLESS и Shadowsocks, обеспечивающие максимальную анонимность.</p>
+                        <p><strong>4. Третьи лица:</strong> Мы никогда не передаем информацию о пользователях сторонним организациям, так как не обладаем данными, позволяющими идентифицировать личность.</p>
+                    </div>`
+            };
+            document.getElementById('modal-content').innerHTML = content[type];
+            document.getElementById('modal').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+    </script>
+</body>
+</html>
