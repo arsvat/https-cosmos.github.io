@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmos VPN — Скорость и Приватность</title>
+    <title>Cosmos VPN — Официальный сайт</title>
     <style>
         body {
             margin: 0; padding: 0;
@@ -13,7 +13,6 @@
             overflow-x: hidden;
         }
 
-        /* Звездный фон */
         .stars {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, #111 0%, #000 100%);
@@ -24,36 +23,30 @@
             z-index: -1; opacity: 0.4;
         }
 
-        /* Кнопка смены языка */
         .lang-switch {
             position: absolute; top: 20px; right: 20px;
             background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255,255,255,0.2);
             padding: 8px 20px; border-radius: 30px;
-            cursor: pointer; transition: 0.3s; font-weight: bold;
-            z-index: 10;
+            cursor: pointer; transition: 0.3s; font-weight: bold; z-index: 10;
         }
         .lang-switch:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); }
 
-        .container { max-width: 1000px; width: 90%; text-align: center; padding: 80px 0 40px; }
+        .container { max-width: 1000px; width: 90%; text-align: center; padding: 60px 0 40px; }
 
-        /* Иконка Черной Дыры */
-        .black-hole {
-            width: 110px; height: 110px; background: #000; border-radius: 50%;
-            margin: 0 auto 25px; position: relative;
-            box-shadow: 0 0 35px 8px rgba(255, 255, 255, 0.35);
-            border: 1px solid rgba(255,255,255,0.2);
+        .logo-container {
+            width: 180px; height: 180px; margin: 0 auto 25px;
+            border-radius: 50%; overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 0 30px rgba(255,255,255,0.2);
         }
+        .logo-container img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Эффект Жидкого Стекла */
         .glass {
             background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px;
         }
 
         .features { display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap; }
@@ -62,12 +55,19 @@
         .feature-item span { color: #888; font-size: 0.9rem; }
 
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 60px; }
-        .card { padding: 45px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card { padding: 45px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-10px); border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.07); }
 
         .price { font-size: 2.5rem; font-weight: 800; margin: 20px 0; letter-spacing: -1px; }
 
-        /* Модальные окна */
+        /* Кнопка купить */
+        .buy-btn {
+            background: #fff; color: #000; border: none; padding: 12px;
+            border-radius: 12px; font-weight: bold; cursor: pointer;
+            transition: 0.3s; margin-top: auto; text-decoration: none;
+        }
+        .buy-btn:hover { background: #ccc; transform: scale(1.05); }
+
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); backdrop-filter: blur(25px); z-index: 1000;
@@ -75,15 +75,13 @@
         }
         .modal-content { 
             max-width: 850px; margin: 0 auto; line-height: 1.7; position: relative;
-            padding: 40px; box-sizing: border-box; color: #ddd;
+            padding: 40px; box-sizing: border-box; color: #ddd; text-align: left;
         }
         .modal-content h2 { color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .close-btn { position: absolute; top: 20px; right: 25px; cursor: pointer; font-size: 2.5rem; color: #fff; }
-
-        footer { margin-top: auto; padding: 40px; text-align: center; width: 100%; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.05); }.footer-links span { cursor: pointer; margin: 0 15px; color: #666; transition: 0.3s; font-size: 0.95rem; }
+        .close-btn { position: absolute; top: 20px; right: 25px; cursor: pointer; font-size: 2.5rem; color: #fff; }footer { margin-top: auto; padding: 40px; text-align: center; width: 100%; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-links span { cursor: pointer; margin: 0 15px; color: #666; transition: 0.3s; font-size: 0.95rem; }
         .footer-links span:hover { color: #fff; }
-        .support-link { color: #fff; text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: 0.3s; }
-        .support-link:hover { border-bottom-color: #fff; }
+        .support-link { color: #fff; text-decoration: none; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -92,7 +90,9 @@
     <div class="lang-switch" onclick="toggleLang()" id="langBtn">EN</div>
 
     <div class="container">
-        <div class="black-hole"></div>
+        <div class="logo-container">
+            <img src="1000007216.jpg" alt="Cosmos VPN Logo">
+        </div>
         <h1 id="mainTitle" style="font-size: 3rem; letter-spacing: 6px; text-transform: uppercase;">Cosmos VPN</h1>
         <p id="tagline" style="color: #aaa; margin-bottom: 50px; font-size: 1.1rem;"></p>
 
@@ -111,14 +111,17 @@
             <div class="card glass">
                 <h3 id="plan1"></h3>
                 <div class="price">150 ₽</div>
+                <a href="https://t.me/arsvat2" class="buy-btn btnText">Купить</a>
             </div>
-            <div class="card glass" style="border-color: rgba(255,255,255,0.25);">
+            <div class="card glass" style="border-color: rgba(255,255,255,0.3);">
                 <h3 id="plan2"></h3>
                 <div class="price">270 ₽</div>
+                <a href="https://t.me/arsvat2" class="buy-btn btnText">Купить</a>
             </div>
             <div class="card glass">
                 <h3 id="plan3"></h3>
                 <div class="price">1200 ₽</div>
+                <a href="https://t.me/arsvat2" class="buy-btn btnText">Купить</a>
             </div>
         </div>
     </div>
@@ -160,24 +163,26 @@
                 plan1: '1 Месяц',
                 plan2: '3 Месяца',
                 plan3: '1 Год',
+                buyBtn: 'Купить',
                 linkOferta: 'Публичная оферта',
                 linkPrivacy: 'Политика конфиденциальности',
                 supportText: 'Поддержка',
-                ofertaText: `
-                    <h2>Публичная оферта Cosmos VPN</h2>
-                    <p><strong>1. Предмет соглашения</strong><br>Cosmos VPN предоставляет услуги доступа к защищенным серверам. Используя сайт, вы подтверждаете свое совершеннолетие и дееспособность.</p>
-                    <p><strong>2. Порядок предоставления услуг</strong><br>Доступ предоставляется после 100% предоплаты. Мы обеспечиваем стабильное подключение в регионах Европа и Азия. При технических работах аптайм может временно снижаться, о чем мы стараемся уведомлять в поддержке.</p>
-                    <p><strong>3. Стоимость и возврат</strong><br>Тарифы: 150/270/1200 рублей. Возврат средств возможен в течение 24 часов после покупки, если сервис технически не заработал на вашем устройстве.</p><p><strong>4. Запрещенные действия</strong><br>Запрещено использовать VPN для хакерских атак, распространения детской порнографии, спама и нарушения законов страны пребывания. При выявлении нарушений аккаунт блокируется без возврата средств.</p>
-                    <p><strong>5. Изменение условий</strong><br>Мы вправе менять цены и условия оферты. Актуальная версия всегда находится на этой странице.</p>
+                ofertaContent: `
+                    <h2>Публичная оферта сервиса Cosmos VPN</h2>
+                    <p><strong>1. ВВЕДЕНИЕ И ТЕРМИНЫ</strong><br>Настоящая оферта является официальным предложением администрации Cosmos VPN (далее — Исполнитель) заключить Договор об оказании услуг по предоставлению доступа к сети частных серверов. Использование сервиса подразумевает полное согласие с условиями данного документа.</p><p><strong>2. ПРЕДМЕТ ДОГОВОРА</strong><br>Исполнитель обязуется предоставить Пользователю техническую возможность туннелирования интернет-трафика через серверное оборудование в регионах Европа и Азия, а Пользователь обязуется оплатить данные услуги согласно выбранному тарифу.</p>
+                    <p><strong>3. ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</strong><br>Доступ осуществляется с использованием передовых криптографических технологий (VLESS, ShadowSocks, Trojan). Скорость канала может достигать 1 Гбит/с, однако Исполнитель не несет ответственности за ограничения, накладываемые локальными провайдерами связи Пользователя.</p>
+                    <p><strong>4. ПРАВА И ОБЯЗАННОСТИ СТОРОН</strong><br>Исполнитель имеет право проводить профилактические работы на серверах. Пользователь обязуется использовать сервис исключительно в легальных целях. Запрещена любая деятельность, связанная с нарушением авторских прав, массовой рассылкой сообщений (спам), или совершением кибератак.</p>
+                    <p><strong>5. ПОРЯДОК ОПЛАТЫ И ВОЗВРАТОВ</strong><br>Услуги предоставляются по модели предоплаты. В связи с природой цифрового товара, возврат средств возможен только в течение 24 часов с момента первой покупки при условии документально подтвержденной технической невозможности использования сервиса на стороне Исполнителя.</p>
+                    <p><strong>6. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ</strong><br>Исполнитель оставляет за собой право изменять текст оферты. Актуальная версия доступна по адресу сайта проекта. Все споры решаются путем переговоров через официальные каналы поддержки.</p>
                 ,
-                privacyText: 
-                    <h2>Политика конфиденциальности</h2>
-                    <p><strong>1. Политика No-Logs</strong><br>Мы принципиально не собираем логи ваших действий. Мы не знаем, на какие сайты вы заходите и какие данные передаете. Это технически невозможно в нашей архитектуре.</p>
-                    <p><strong>2. Хранение данных</strong><br>Мы храним только минимально необходимую информацию: ваш ID пользователя и срок действия подписки. Мы не храним ваши IP-адреса после завершения сессии.</p>
-                    <p><strong>3. RAM-серверы</strong><br>Наши серверы в Европе и Азии работают исключительно на оперативной памяти. При перезагрузке сервера любая временная системная информация уничтожается физически.</p>
-                    <p><strong>4. Передача данных</strong><br>Поскольку мы не храним персональные данные, мы не можем передать их третьим лицам или государственным органам.</p>
-                    <p><strong>5. Шифрование</strong><br>Для защиты трафика используется стандарт AES-256, обеспечивающий максимальную безопасность в открытых сетях.</p>
-                
+                privacyContent: 
+                    <h2>Политика конфиденциальности Cosmos VPN</h2>
+                    <p><strong>1. ПРИНЦИП "ZERO LOGS"</strong><br>Безопасность Пользователя является нашим приоритетом. Мы придерживаемся политики полного отсутствия ведения журналов активности (логов). Мы НЕ собираем и НЕ храним:<br>- Историю посещенных веб-ресурсов;<br>- Реальные IP-адреса Пользователей;<br>- Данные о временных метках подключений;<br>- Метаданные трафика.</p>
+                    <p><strong>2. RAM-ONLY ИНФРАСТРУКТУРА</strong><br>Все наши серверы в Азии и Европе функционируют исключительно в оперативной памяти (RAM). Это означает, что никакие данные не записываются на жесткие диски, и вся временная системная информация уничтожается физически при каждой плановой или экстренной перезагрузке оборудования.</p>
+                    <p><strong>3. ОБРАБОТКА МИНИМАЛЬНЫХ ДАННЫХ</strong><br>Для функционирования подписки мы сохраняем только идентификатор транзакции и дату окончания доступа. Эта информация надежно зашифрована и не связана с персональной личностью Пользователя.</p>
+                    <p><strong>4. ЗАЩИТА ОТ ТРЕТЬИХ ЛИЦ</strong><br>Мы не передаем никакую информацию маркетинговым агентствам или государственным структурам. Ввиду отсутствия логов, мы не обладаем данными, которые могли бы идентифицировать конкретного Пользователя даже при официальном запросе.</p>
+                    <p><strong>5. ИСПОЛЬЗУЕМЫЕ ТЕХНОЛОГИИ</strong><br>Весь трафик шифруется по стандарту AES-256-GCM или ChaCha20-Poly1305, что исключает возможность перехвата данных на уровне интернет-провайдера или злоумышленников в публичных Wi-Fi сетях.</p>
+                `
             },
             en: {
                 btn: 'RU',
@@ -189,24 +194,20 @@
                 plan1: '1 Month',
                 plan2: '3 Months',
                 plan3: '1 Year',
-                linkOferta: 'Public Offer',
-                linkPrivacy: 'Privacy Policy',
+                buyBtn: 'Buy Now',
+                linkOferta: 'Terms of Service',linkPrivacy: 'Privacy Policy',
                 supportText: 'Support',
-                ofertaText: 
+                ofertaContent: 
                     <h2>Public Offer — Cosmos VPN</h2>
-                    <p><strong>1. Subject of Agreement</strong><br>Cosmos VPN provides access to secure servers. By using the website, you confirm you are of legal age.</p>
-                    <p><strong>2. Service Provision</strong><br>Access is provided after 100% prepayment. We guarantee stable connections in Europe and Asia. Uptime may temporarily decrease during maintenance.</p>
-                    <p><strong>3. Cost & Refunds</strong><br>Plans: 150/270/1200 RUB. Refunds are possible within 24 hours if the service is technically non-functional on your device.</p>
-                    <p><strong>4. Prohibited Actions</strong><br>VPN usage for hacking, spam, child pornography, or any illegal activities is strictly forbidden. Accounts will be banned without refunds for violations.</p>
-                    <p><strong>5. Terms Changes</strong><br>We reserve the right to change prices and terms. The latest version is always available here.</p>
+                    <p><strong>1. AGREEMENT SUBJECT</strong><br>Cosmos VPN provides virtual private network services. By subscribing, you agree to comply with all terms stated herein.</p>
+                    <p><strong>2. TECHNOLOGY & PERFORMANCE</strong><br>We provide high-speed access (up to 1Gbps) using VLESS and Reality protocols. Service availability is maintained at 99.9% uptime.</p>
+                    <p><strong>3. RESTRICTIONS</strong><br>Spam, DDoS, and copyright infringement are strictly prohibited. Violations lead to immediate termination without refund.</p>
                 ,
-                privacyText: 
+                privacyContent: 
                     <h2>Privacy Policy</h2>
-                    <p><strong>1. No-Logs Policy</strong><br>We strictly do not collect logs of your activities. We do not know which websites you visit or what data you transfer. Our architecture makes it impossible.</p>
-                    <p><strong>2. Data Storage</strong><br>We only store minimum necessary info: your User ID and subscription expiry date. We do not store your IP addresses after a session ends.</p>
-                    <p><strong>3. RAM-only Servers</strong><br>Our servers in Europe and Asia run on RAM only. All temporary system data is physically destroyed upon reboot.</p><p><strong>4. Data Disclosure</strong><br>Since we do not store personal data, we cannot disclose it to third parties or authorities.</p>
-                    <p><strong>5. Encryption</strong><br>Traffic is protected by AES-256 standard, ensuring maximum security in public networks.</p>
-                `
+                    <p><strong>1. STRICT NO-LOGS POLICY</strong><br>We do not store browsing history, IP addresses, or timestamps. Your activity remains private and invisible to everyone, including us.</p>
+                    <p><strong>2. RAM-ONLY NODES</strong><br>Our infrastructure runs entirely on RAM, meaning all temporary system data is wiped upon reboot.</p>
+                
             }
         };
 
@@ -224,8 +225,10 @@
             document.getElementById('linkOferta').innerText = t.linkOferta;
             document.getElementById('linkPrivacy').innerText = t.linkPrivacy;
             document.getElementById('supportText').innerText = t.supportText;
-            document.getElementById('ofertaContent').innerHTML = t.ofertaText;
-            document.getElementById('privacyContent').innerHTML = t.privacyText;
+            document.getElementById('ofertaContent').innerHTML = t.ofertaContent;
+            document.getElementById('privacyContent').innerHTML = t.privacyContent;
+            
+            document.querySelectorAll('.btnText').forEach(btn => btn.innerText = t.buyBtn);
         }
 
         function toggleLang() {
