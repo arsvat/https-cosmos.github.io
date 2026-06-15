@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lion's Cube Client - Menu Preview</title>
+    <title>Lion's Cube Client - Мобильное Превью</title>
     <style>
-        /* Сброс стилей и шрифты */
+        /* Сброс стилей для идеального отображения на смартфонах */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body, html {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0d0d13;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #050508;
             color: #fff;
         }
 
-        /* Фоновое видео/картинка Майнкрафт с размытием */
+        /* Атмосферный размытый фон Майнкрафта */
         .minecraft-bg {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75)), 
+            background: linear-gradient(rgba(5, 5, 8, 0.8), rgba(5, 5, 8, 0.95)), 
                         url('https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=2000') no-repeat center center;
             background-size: cover;
-            filter: blur(4px) scale(1.05);
+            filter: blur(8px) scale(1.05);
             z-index: 1;
         }
 
@@ -43,108 +44,103 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 20px;
             z-index: 2;
         }
 
-        /* Логотип со Львом */
+        /* Наш кастомный Лев */
         .logo-wrapper {
-            margin-bottom: 30px;
-            animation: pulse 3s ease-in-out infinite;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
         }
 
         .logo-wrapper img {
-            width: 280px;
+            width: 85%;
+            max-width: 240px;
             height: auto;
-            filter: drop-shadow(0 0 20px rgba(255, 85, 0, 0.4));
+            opacity: 0.95;
         }
 
-        /* Версии игры */
+        /* Список поддерживаемых версий */
         .version-tag {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            border: 1px solid rgba(0, 162, 255, 0.3);
-            color: #00A2FF;
-            margin-bottom: 25px;
-            box-shadow: 0 0 15px rgba(0, 162, 255, 0.1);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 40px;
+            text-transform: uppercase;
         }
 
-        /* Кнопки меню в стиле Lunar */
+        /* Кнопки управления */
         .buttons-group {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            width: 320px;
+            width: 100%;
+            max-width: 280px;
         }
 
+        /* Ультра-минималистичные кнопки */
         .mc-button {
-            background: rgba(20, 20, 30, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e0e0e0;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.75);
             padding: 14px;
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
             border-radius: 6px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
             text-align: center;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        /* Кастомные неоновые ховеры для кнопок */
-        .btn-single:hover {
+        /* Неоновые ховеры при нажатии/наведении */
+        .btn-single:active, .btn-single:hover {
             border-color: #FF5500;
-            box-shadow: 0 0 15px rgba(255, 85, 0, 0.4);
             color: #fff;
-            transform: translateY(-2px);
+            background: rgba(255, 85, 0, 0.04);
         }
 
-        .btn-multi:hover {
+        .btn-multi:active, .btn-multi:hover {
             border-color: #00A2FF;
-            box-shadow: 0 0 15px rgba(0, 162, 255, 0.4);
             color: #fff;
-            transform: translateY(-2px);
+            background: rgba(0, 162, 255, 0.04);
         }
 
-        .btn-tab:hover {
-            border-color: #FFFF00;
-            box-shadow: 0 0 15px rgba(255, 255, 0, 0.4);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-        
         .btn-tab {
-            background: rgba(255, 255, 0, 0.05);
-            border-color: rgba(255, 255, 0, 0.2);
+            border-color: rgba(255, 255, 0, 0.15);
             color: #FFFF00;
         }
-
-        .btn-quit:hover {
-            background: rgba(225, 40, 40, 0.2);
-            border-color: #ff3333;
-            color: #fff;
+        
+        .btn-tab:active, .btn-tab:hover {
+            border-color: #FFFF00;
+            background: rgba(255, 255, 0, 0.04);
         }
 
-        /* Всплывающее меню настроек (По нажатию на TAB) */
+        .btn-quit:active, .btn-quit:hover {
+            border-color: rgba(255, 50, 50, 0.5);
+            color: #ff5555;
+            background: rgba(255, 50, 50, 0.04);
+        }
+
+        /* Минималистичное меню настроек (По кнопке TAB) */
         .tab-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 15, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 8, 0.96);
             z-index: 10;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s ease;
+            padding: 20px;
         }
 
         .tab-overlay.active {
@@ -153,102 +149,87 @@
         }
 
         .settings-panel {
-            background: #161622;
-            width: 650px;
-            height: 450px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 30px;
+            width: 100%;
+            max-width: 480px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .tab-overlay.active .settings-panel {
-            transform: scale(1);
         }
 
         .panel-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .panel-header h2 {
-            font-size: 22px;
-            background: linear-gradient(45deg, #FF5500, #00A2FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
         }
 
         .close-btn {
             background: none;
             border: none;
-            color: #888;
+            color: rgba(255, 255, 255, 0.4);
             font-size: 24px;
             cursor: pointer;
+            padding: 5px;
         }
-        .close-btn:hover { color: #fff; }
 
-        /* Настройки буста FPS внутри панели */
         .mods-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            overflow-y: auto;
-            flex-grow: 1;
-            padding-right: 5px;
         }
 
+        /* Элементы модов */
         .mod-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255,255,255,0.02);
-            padding: 12px 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.03);
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        .mod-info h4 { color: #fff; margin-bottom: 2px; }
-        .mod-info p { color: #777; font-size: 13px; }
+        .mod-info h4 { 
+            font-size: 14px; 
+            font-weight: 500; 
+            color: rgba(255, 255, 255, 0.9); 
+            margin-bottom: 4px; 
+        }
+        
+        .mod-info p { 
+            color: rgba(255, 255, 255, 0.35); 
+            font-size: 11px; 
+        }
 
-        /* Переключатель (Toggle Switch) */
+        /* Переключатели-точки */
         .switch {
             position: relative;
             display: inline-block;
-            width: 46px;
-            height: 24px;
+            width: 38px;
+            height: 20px;
         }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider {
             position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #333; transition: .3s; border-radius: 24px;
+            background-color: rgba(255, 255, 255, 0.08); transition: .2s; border-radius: 20px;
         }
         .slider:before {
-            position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px;
-            background-color: white; transition: .3s; border-radius: 50%;
+            position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px;
+            background-color: rgba(255, 255, 255, 0.4); transition: .2s; border-radius: 50%;
         }
-        input:checked + .slider { background-color: #00A2FF; box-shadow: 0 0 10px rgba(0, 162, 255, 0.5); }
-        input:checked + .slider:before { transform: translateX(22px); }
+        input:checked + .slider { background-color: rgba(0, 162, 255, 0.15); border: 1px solid #00A2FF; }
+        input:checked + .slider:before { transform: translateX(18px); background-color: #00A2FF; }
 
         .hint-footer {
             text-align: center;
-            color: #555;
-            font-size: 12px;
-            margin-top: 15px;
-        }
-
-        /* Анимация пульсации лого */
-        @keyframes pulse {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 11px;
+            margin-top: 40px;
+            letter-spacing: 1px;
         }
     </style>
 </head>
@@ -257,70 +238,52 @@
     <div class="minecraft-bg"></div>
 
     <div class="menu-container">
-        <!-- Логотип (Используем ссылку на сгенерированного ранее льва) -->
         <div class="logo-wrapper">
-            <img src="https://lh3.googleusercontent.com/d/1O0K4zR9X2p2PiaYg8E8vY7S3b6yZ9k7A" alt="Lion's Cube Logo" onerror="this.src='https://i.imgur.com/w2Y6Aor.png';">
+            <img src="https://i.imgur.com/w2Y6Aor.png" alt="Lion's Cube Logo">
         </div>
 
-        <!-- Поддерживаемые версии -->
-        <div class="version-tag">MULTIVERSE PACK [1.16.5 | 1.20.1 | 1.21.11]</div>
+        <div class="version-tag">1.16.5 • 1.20.1 • 1.21.11</div>
 
-        <!-- Кнопки управления -->
         <div class="buttons-group">
-            <div class="mc-button btn-single" onclick="alert('Запуск Одиночной игры...')">Одиночная игра</div>
-            <div class="mc-button btn-multi" onclick="alert('Подключение к серверам...')">Сетевая игра</div>
-            <div class="mc-button btn-tab" onclick="toggleSettings(true)">Настройки модов (TAB)</div>
-            <div class="mc-button btn-quit" onclick="window.close(); alert('Выход из игры')">Выход</div>
+            <div class="mc-button btn-single" onclick="alert('Режим: Одиночная игра')">Одиночная игра</div>
+            <div class="mc-button btn-multi" onclick="alert('Режим: Сетевые сервера')">Сетевая игра</div>
+            <div class="mc-button btn-tab" onclick="toggleSettings(true)">Настройки (TAB)</div>
+            <div class="mc-button btn-quit" onclick="alert('Выход из клиента')">Выход</div>
         </div>
     </div>
 
-    <!-- Всплывающее оверлей-меню по кнопке TAB -->
     <div class="tab-overlay" id="tabMenu">
         <div class="settings-panel">
             <div class="panel-header">
-                <h2>LION'S CUBE • Настройки Клиента</h2>
-                <button class="close-btn" onclick="toggleSettings(false)">&times;</button>
+                <h2>Параметры Lion's Cube</h2>
+                <button class="close-btn" onclick="toggleSettings(false)">×</button>
             </div>
 
             <div class="mods-list">
-                <!-- Мод 1 -->
                 <div class="mod-item">
                     <div class="mod-info">
-                        <h4>Sodium Engine (Буст FPS)</h4>
-                        <p>Оптимизация чанков и рендеринга. Дает максимальный прирост кадров.</p>
+                        <h4>Sodium Engine (FPS Буст)</h4>
+                        <p>Максимальное сжатие чанков и отключение лагов.</p>
                     </div>
                     <label class="switch">
                         <input type="checkbox" checked>
                         <span class="slider"></span>
                     </label>
                 </div>
-                <!-- Мод 2 -->
                 <div class="mod-item">
                     <div class="mod-info">
                         <h4>Entity Culling</h4>
-                        <p>Не рендерит невидимых мобов за стенами, разгружая процессор.</p>
+                        <p>Убирает прогрузку скрытых за стенами мобов.</p>
                     </div>
                     <label class="switch">
                         <input type="checkbox" checked>
                         <span class="slider"></span>
                     </label>
                 </div>
-                <!-- Мод 3 -->
                 <div class="mod-item">
                     <div class="mod-info">
-                        <h4>Показ FPS и Keystrokes</h4>
-                        <p>Отображает нажатия клавиш (W, A, S, D, ЛКМ, ПКМ) и текущий FPS на экране.</p>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <!-- Мод 4 -->
-                <div class="mod-item">
-                    <div class="mod-info">
-                        <h4>Бесшовные стекла (Continuity)</h4>
-                        <p>Соединяет текстуры стеклянных блоков и панелей между собой.</p>
+                        <h4>Минималистичный интерфейс</h4>
+                        <p>Делает ХУД быстрых слотов тонким и прозрачным.</p>
                     </div>
                     <label class="switch">
                         <input type="checkbox" checked>
@@ -329,29 +292,24 @@
                 </div>
             </div>
 
-            <div class="hint-footer">Вы можете закрыть это меню на крестик или повторно нажав кнопку TAB/Esc</div>
+            <div class="hint-footer">[ Тапни на крестик или нажми TAB для закрытия ]</div>
         </div>
     </div>
 
     <script>
         const tabMenu = document.getElementById('tabMenu');
 
-        // Функция открытия/закрытия меню настроек
         function toggleSettings(show) {
-            if (show) {
-                tabMenu.classList.add('active');
-            } else {
-                tabMenu.classList.remove('active');
-            }
+            show ? tabMenu.classList.add('active') : tabMenu.classList.remove('active');
         }
 
-        // Отслеживание физического нажатия на кнопку TAB на клавиатуре
+        // Поддержка нажатия физической кнопки TAB, если играешь с клавиатуры на телефоне
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Tab') {
-                event.preventDefault(); // Отключаем стандартный фокус браузера на элементах
+                event.preventDefault();
                 tabMenu.classList.toggle('active');
             }
-            if (event.key === 'Escape' && tabMenu.classList.contains('active')) {
+            if (event.key === 'Escape') {
                 tabMenu.classList.remove('active');
             }
         });
